@@ -284,3 +284,21 @@ df1=pd.read_csv(os.path.join(OUTPUT_DIR_PATH,"NeedConcern/pidlist.csv"))
 df2=pd.read_csv(os.path.join(OUTPUT_DIR_PATH,"NeedConcern/validpidlist.csv"))
 df=pd.concat([df1,df2])
 getFileLists(df["pid"].tolist())
+
+
+df = pd.read_csv(os.path.join(OUTPUT_DIR_PATH,'NeedConcern/trickWithDetail.csv'))
+for pid in df.pid.unique():
+  print(f"################### {pid} ###################")
+  p_df = df[df['pid']==pid]
+  pid_txt=''
+  p_name=''
+  for index, row in p_df.iterrows():
+    pname=row['pname']
+    if pname!=p_name:
+      pid_txt += f"{row['album_name']} {row['artist_name']} {row['track_name']} {row['pname']}"
+      p_name=pname
+    else:
+      pid_txt += f"{row['album_name']} {row['artist_name']} {row['track_name']}"
+  p_file = open(os.path.join(OUTPUT_DIR_PATH,"Output1",str(pid)+".txt"), 'w', encoding="utf-8")
+  p_file.write(pid_txt)
+  p_file.close()
