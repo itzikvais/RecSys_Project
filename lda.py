@@ -5,6 +5,10 @@ import os
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+
+DATA_DIR_PATH = os.path.join(os.getcwd(),'part_data/')
+OUTPUT_DIR_PATH =  os.path.join(os.getcwd(),'outputs/')
+
 def gettxt(path,idlist):
     mylist=[]
     for i in idlist:
